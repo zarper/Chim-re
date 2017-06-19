@@ -1,0 +1,129 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Etape
+ *
+ * @ORM\Table(name="etape")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EtapeRepository")
+ */
+class Etape
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=500, nullable=true)
+     */
+    private $description;
+    
+    /**
+     * @var int
+     * @Assert\Range(min =0)
+     * @ORM\Column(name="heuretravail", type="integer")
+     */
+    private $heuretravail;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Bijoux")
+     * @ORM\JoinColumn(name="bijoux_id_etape", referencedColumnName="id",nullable=false)
+     */
+    private $bijoux;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set heuretravail
+     *
+     * @param integer $heuretravail
+     *
+     * @return Etape
+     */
+    public function setHeuretravail($heuretravail)
+    {
+        $this->heuretravail = $heuretravail;
+
+        return $this;
+    }
+
+    /**
+     * Get heuretravail
+     *
+     * @return int
+     */
+    public function getHeuretravail()
+    {
+        return $this->heuretravail;
+    }
+
+
+
+    /**
+     * Set bijoux
+     *
+     * @param \AppBundle\Entity\Bijoux $bijoux
+     *
+     * @return Etape
+     */
+    public function setBijoux(\AppBundle\Entity\Bijoux $bijoux)
+    {
+        $this->bijoux = $bijoux;
+
+        return $this;
+    }
+
+    /**
+     * Get bijoux
+     *
+     * @return \AppBundle\Entity\Bijoux
+     */
+    public function getBijoux()
+    {
+        return $this->bijoux;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Etape
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+}

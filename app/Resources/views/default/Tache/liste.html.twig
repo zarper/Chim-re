@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block beforebody %}
+    <a class='btn btn-primary' href="{{  path('nouvelletache') }}">Crée une tache</a>
+    </br></br>
+{%  endblock %}
+
+{% block body %}
+    
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %} 
+
+    
+    <table class="table">
+        <tr>
+            <th>  Tache : </th>
+            <th>  Date : </th>
+            <th>  Etape : </th>
+            <th>  Bijou : </th>
+            <th>  Modifier/Suprimer </th>
+        </tr>
+        {% for tache in taches %}
+            <tr>
+               <td> <a class='linked' href="{{ path("affichagelistetache",{id: 0 , idtache: tache.id }) }}">{{ tache.description }}</a></td>
+               <td> {{tache.datedebut|date('d-m-Y') }}/{{tache.datefin|date('d-m-Y') }}</td>
+               <td> {{tache.etape.description }} </td>
+               <td> {{tache.etape.bijoux.nom }} </td>
+               <td>
+                   <a class="btn btn-default">modifier</a>&nbsp;&nbsp;
+                   <a class="btn btn-default">suprimer</a>
+               </td>
+           </tr>  
+        {% endfor %} 
+    </table>
+{%  endblock %}
+
+{% block stylesheets %}   
+                                
+     {{ parent() }}             
+                                
+{%  endblock %}

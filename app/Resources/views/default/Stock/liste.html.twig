@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block beforebody %}
+    <a class='btn btn-primary' href="{{  path('nouveaustock') }}">Nouveau Stock</a>
+    </br></br>
+{%  endblock %}
+
+{% block body %}
+    
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %} 
+    <table class="table">
+        <tr>
+            <th>
+                <h3>Stock :</h3>
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        {% for stock in stocks %}
+            <tr>
+                <td>
+                    <a class='w3-button w3-white w3-border' href=''>
+                        {{stock.nom }}
+                    </a>
+                </td>
+                <td>
+                    <a class='w3-button w3-white w3-border' href="{{  path('modifierstock', {'id':stock.id}) }}">
+                        modifier
+                    </a>
+                    <a class='w3-button w3-white w3-border' href="{{  path('stock_delete', {'id':stock.id}) }}">
+                        supprimer
+                    </a>
+                </td>
+            </tr>
+        {% endfor %} 
+    </table>
+{%  endblock %}
+
+{% block stylesheets %}                 
+     {{ parent() }}             
+{%  endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
+       <h3>Tache : {{incident.tache.description}}</h3></br>
+            
+           <table>
+               <tr><th>Description: {{incident.description }}</br></th></tr>
+               <tr>
+                   <th>Fait par </th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{user.nom }}</th>
+               </tr>
+               <tr>
+                   <th>Vu</th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>
+                   {%if incident.vu == true %}
+                       vu
+                   {% else %}
+                       pas vu
+                   {% endif %}
+                   </th>
+               </tr>
+           </table></br></br>
+           <a class='w3-button w3-white w3-border' href="{{ path("incident_liste") }}">Retour</a>
+{%  endblock %}
+
+{% block stylesheets %}   
+                                   
+     {{ parent() }}
+                                     
+{%  endblock %}

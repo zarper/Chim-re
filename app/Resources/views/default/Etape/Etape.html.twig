@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block beforebody %}
+    <a class='btn btn-primary' href="{{  path('nouvelleetape') }}">Nouvelle étape</a>
+    </br></br>
+{%  endblock %}
+
+{% block body %}
+    
+        Etapes :
+        <div class="etapes" >
+            {% for etape in etapes %}
+                <a class='w3-button w3-white w3-border' href="{{  path('modifierbijou' , {'id':etape.id}) }}">{{ etape.nom }}</a>
+            {% endfor %}
+        <div>
+
+{% endblock %}

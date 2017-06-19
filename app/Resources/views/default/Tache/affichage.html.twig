@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
+       <h3>Tache : {{tache.description}}</h3></br>
+            
+           <table>
+               <tr><th>Bijou {{tache.etape.bijou.nom }}</br></th></tr>
+               <tr>
+                   <th>Date de début</th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{tache.datedebut|date('Y-m-d') }}</th>
+               </tr>
+               <tr>
+                   <th>Date de fin</th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{tache.datefin|date('Y-m-d') }}</th>
+               </tr>
+               <tr>
+                   <th>Commentaire</th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{tache.comentaire }}</th>
+               </tr>
+               <tr>
+                   <th>Etape</th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{tache.etape.id }}</th>
+               </tr>
+               <tr>
+                   <th>Employé</th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{tache.user }}</th>
+               </tr>
+           </table></br></br>
+           <a  class='w3-button w3-white w3-border' href='{{ path("tache_modify",{id: tache.etape.bijou.id , idetape: tache.etape.id , idtache: tache.id}) }}'>
+               modifier
+           </a>
+           <a  class='w3-button w3-white w3-border' href='{{ path("tache_delete",{id: tache.etape.bijou.id , idetape: tache.etape.id , idtache: tache.id}) }}'>
+               suprimer
+           </a>
+           </br></br>
+           <a class='w3-button w3-white w3-border' href="{{ path(route,{id: tache.etape.bijou.id ,idetape: tache.etape.id ,idtache: tache.id}) }}">Retour</a>
+{%  endblock %}
+
+{% block stylesheets %}   
+                                   
+     {{ parent() }}
+     
+                                
+{%  endblock %}

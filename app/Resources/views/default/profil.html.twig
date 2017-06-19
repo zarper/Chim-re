@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block beforebody %}
+    <a class='btn btn-primary' href="{{  path('nouvelletache') }}">Nouvelle Tache</a>
+    </br></br>
+{%  endblock %}
+
+{% block body %}
+        
+    <b>Bienvenue {{ user.username }}</b></br></br>
+        {% if tachesaf != null %}Vos taches a faire :
+            <div classe="container">
+                {% for tache in tachesaf %}
+                    <form method='post'  action="{{ path("userprofil",{id: user.id}) }}"><button type='submit' class='btn btn-default' type="button" name="tache" value="{{ tache.id }}">Commencer</button>  &nbsp;&nbsp;&nbsp;<a type="button" class="btn btn-default" href="{{ path("affichagetache",{ id:tache.etape.bijou.id, idetape:tache.etape.id, idtache: tache.id }) }}">{{ tache.description }}</a></form>
+
+                     </br>
+                {% endfor%}
+            <div>
+        {% else %}
+            Vous n'avez pas de taches a faire</br></br>
+        {% endif %}
+        {% if tachesav != null %}Vos taches a valider :
+            <div classe="container">
+                {% for tache in tachesav %}
+                    <a href="{{ path("validation",{id: tache.id ,iduser: user.id}) }}"><button class='btn btn-default' type="button" name="tache" value="{{ tache.id }}">Valider</button></a>
+                    &nbsp;&nbsp;&nbsp;<a type="button" class="btn btn-default" href="{{ path("affichagetache",{ id:tache.etape.bijou.id, idetape:tache.etape.id, idtache: tache.id }) }}">{{ tache.description }}</a>
+                     </br>
+                {% endfor%}
+            <div>
+        {% else %}
+                Vous n'avez pas de taches a valider</br></br>
+        {% endif %}
+{%  endblock %}

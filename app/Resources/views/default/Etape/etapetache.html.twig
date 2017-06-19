@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+        {{ bijou.nom }}
+        Etapes {{ etape.id }} :
+            </br></br>
+            {% for taches in taches %}
+                <a class='btn btn-default' href="{{ path("affichagetache",{id:bijou.id,idetape:taches.etape.id, idtache: taches.id }) }}">{{ taches.description }}</a>
+            {% endfor %}
+            {% if taches == null %}
+                Vous n'avez pas de tache(s) attribué a cette étape
+            {% endif %}
+            </br></br>
+            <a class="btn btn-default" onclick="window.history.back()">retour</a>
+{% endblock %}

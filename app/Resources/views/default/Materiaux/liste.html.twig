@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %} 
+
+    
+    <table class="table">
+        <tr>
+            <th>
+                Nom
+            </th>
+            <th>
+                Quantité en gramme
+            </th>
+            <th>
+                Tache
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+   {% for materiel in materiaux %}
+       <tr>
+       <td>
+           {{materiel.stock.nom}}
+       </td>
+       <td>
+       {{materiel.quantite }}
+       </td>
+       <td>
+       {{materiel.tache.description }}
+       </td><td><a class="btn btn-default" href=''>Modifier</a></td>
+       </tr>
+   {% endfor %} 
+    </table>
+{%  endblock %}
+
+{% block stylesheets %}   
+                                  
+     {{ parent() }}             
+                                
+{%  endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+<h1>Ajouter un client</h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+<a class="btn btn-default" onclick="window.history.back()">retour</a>
+
+{% for type, flash_messages in app.session.flashBag.all %}
+    {% for flash_message in flash_messages %}
+        <div class="flash-{{ type }}">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+{% endfor %}  
+
+
+{% endblock %}
+

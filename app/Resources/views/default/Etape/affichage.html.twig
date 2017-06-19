@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
+       <h3>Etape : {{etape.description}}</h3></br></br>
+            <b> {{etape.bijou.nom}}</b></br></br>
+           <table class="table">
+                <tr>
+                    <th> Heures de travaille </th>
+                    <th> Photo </th>
+                    <th> Taches </th>
+                </tr>
+               <tr>
+                    <td>{{etape.heuretravail }}</td>
+                    <td>
+                       <div href="#" class="col-xs-6 col-md-3"> 	
+                            <img style="height:350px;length:250px" src="{{ asset(etape.photo) }}" alt="image de l'étape" />
+                       </div>
+                   </td>
+                   <td>
+                    {%if taches != null %}
+                         {% for tache in taches %}
+                                 <a class='btn btn-default' href="{{ path("affichagetache",{id:bijou.id,idetape:etape.id, idtache: tache.id }) }}">
+                                     {{ tache.description }}
+                                 </a></br>
+
+                         {% endfor %}
+                     {%else%}
+                         Vous n'avez pas de taches attribué a cette étape
+                     {%endif%}
+                   </td>
+                </tr>
+           </table>
+                        
+           </br></br>
+           <a class="btn btn-default" onclick="window.history.back()">retour</a>
+           {%  endblock %}
+
+{% block stylesheets %}   
+                                   
+     {{ parent() }}
+     
+                                
+{%  endblock %}

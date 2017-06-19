@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        Employé :
+        <div class="user" >
+            {% for user in users %}
+                 {% if user.granted("ROLE_SUPER_ADMIN") == false %} 
+                <a class='w3-button w3-white w3-border' href="{{  path('userprofil' , {'id':user.id}) }}">{{ user.username }}</a>
+              {% endif %}  
+       
+                {% endfor %}
+        <div></br>
+          
+           {% if app.user.granted('ROLE_SUPER_ADMIN') %} 
+        Administrateur :
+        <div class="user" >
+            {% for user in users %}
+                {% if user.granted("ROLE_SUPER_ADMIN") == true %} 
+                         <a class='w3-button w3-white w3-border' href="{{  path('userprofil' , {'id':user.id}) }}">{{ user.username }}</a>
+                {% endif %}
+            {% endfor %}
+            
+        <div>
+          {% endif %}
+{%  endblock %}
+
+{% block stylesheets %}   
+    
+     {{ parent() }}
+
+{%  endblock %}

@@ -1,0 +1,55 @@
+{# empty Twig template #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+
+    <a class="linked h3" href='{{  path('incident_liste') }}'>Liste des nouveaux incidents</a></br></br>
+    <div class="container">
+        <div class="row-fluid">
+            
+            {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="alert alert-{{ type }}">
+                {{ flash_message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}     
+
+        <div class="col-xs-6">
+            <table class="table">
+            <th class="h3">Nouveaux incidents :</th>
+            <th class="h3">Validé</th>
+            {% for incident in incidentsnv %}
+                <tr>
+                    <td>
+                        <a class='btn btn-warning' href='{{  path('affichage_incident' , {'id':incident.id}) }}'>{{incident.description }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <a class='btn btn-default' href='{{ path('vu', {'id':incident.id}) }}'>
+                            Marquer comme vu
+                        </a> 
+                    </td>
+                </tr>    
+            {% endfor %}   
+        </table>       
+        </div>
+        <div class="col-xs-6">
+            <table class="table">
+            <th class="h3">Ancients incidents :</th>        
+                    {% for incident in incidentsv %}
+                        <tr>
+                            <td>
+                                <a class='btn btn-default' href='{{  path('affichage_incident' , {'id':incident.id}) }}'>{{incident.description }}</a>
+                            </td>
+                        </tr> 
+                {% endfor %}                  
+            </table>
+        </div>
+        </div>
+    </div>
+{%  endblock %}
+
+{% block stylesheets %}                 
+     {{ parent() }}             
+{%  endblock %}

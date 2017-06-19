@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %} 
+    <a class="linked h3" href='{{  path('all_incident_liste') }}'>Liste de tout les incidents</a></br></br>
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th class="h4">Nouveaux incidents </th>
+                <th>validé</th>
+            </tr>
+            {% for incident in incidents %}
+                <tr>
+                    <td>
+                        <a class='btn btn-warning' href='{{  path('affichage_incident' , {'id':incident.id}) }}'>
+                            {{incident.description }}
+                        </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <a class='btn btn-default' href='{{ path('vu', {'id':incident.id}) }}'>
+                            Marquer comme vu
+                        </a> 
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{%  endblock %}
+
+{% block stylesheets %}                 
+     {{ parent() }}             
+{%  endblock %}

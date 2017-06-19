@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block beforebody %}
+    <a class='btn btn-primary' href="{{  path('ajoutclient') }}">Nouveau Client</a>
+    </br></br>
+{%  endblock %}
+
+{% block body %}
+    
+    <h3>Clients:</h3>
+    
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Action</th>
+        </tr>
+   {% for client in clients %}
+       <tr>
+       <td><a href='{{ path("client_modify",{id: client.id}) }}' class="btn btn-default">{{client.nom }}</a></td>
+       <td><a href='{{ path("client_modify",{id: client.id}) }}' class="btn btn-default">modifier</a><a href='{{ path("client_delete",{id: client.id}) }}' class="btn btn-default">suppr</a></td>
+       </tr>
+   {% endfor %} 
+    </table>
+    
+     {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{%  endblock %}
+
+
+{% block stylesheets %}
+    
+     {{ parent() }}
+                   
+{%  endblock %}

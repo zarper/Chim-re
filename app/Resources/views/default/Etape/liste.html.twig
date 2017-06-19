@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %} 
+    
+    
+    <table class="table">
+        <tr>
+            <th>
+                <h3>Etapes:</h3>
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+   {% for etape in etape %}
+       <tr>
+           <td>
+               <a class='btn btn-default' href="{{  path('affichageetape', {'id':etape.bijou.id, 'idetape':etape.id}) }}">{{  etape.description }}</a>
+           </td>
+           <td>
+               <a class='btn btn-default' href="{{  path('etape_modify', {'idetape':etape.id}) }}">modifier</a>
+               <a class='btn btn-default'href="{{  path('etape_delete', {'idetape':etape.id}) }}">supprimer</a>
+           </td>
+       </tr>
+   {% endfor %} 
+    </table>
+{%  endblock %}
+
+{% block stylesheets %}                 
+     {{ parent() }}             
+{%  endblock %}

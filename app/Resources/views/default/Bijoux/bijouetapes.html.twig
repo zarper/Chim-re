@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Etapes du bijou {{ bijou.nom }} :</br></br>
+        <a class='btn btn-primary' href="{{  path('nouveauetape',{id: bijou.id}) }}">Nouvelle étape</a></br></br>
+        <table class="table table-bordered" >
+            <tr>
+                <th>
+                    Description de l'étape
+                </th>
+                <th>
+                    Photo de l'étape
+                </th>
+            </tr>
+            {% for etape in etapes %}
+                <tr>                
+                    <td>
+                        <a class='btn btn-default' href='{{ path("bijou_etape_liste_tache",{id: bijou.id , idetape: etape.id}) }}'>{{ etape.description }}</a>
+                    </td>
+                    <td>
+                        <div href="#" class="col-xs-6 col-md-3"> 	
+                            <img class="img-thumbnail" src="{{ asset(etape.photo) }}" alt="image" />
+                        </div>
+                    </td>
+                    <td>
+                        <a class='btn btn-default' href="{{  path('affichageetape', {'id':etape.bijou.id, 'idetape':etape.id}) }}">
+                           Detail
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a class="btn btn-default" href="{{  path('bijou_liste') }}">retour</a>
+{%  endblock %}

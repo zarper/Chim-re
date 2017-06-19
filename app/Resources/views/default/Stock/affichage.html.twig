@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for type, flash_messages in app.session.flashBag.all %}
+        {% for flash_message in flash_messages %}
+            <div class="flash-{{ type }}">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
+       <h3>Stock : {{stock.nom}} </h3></br>
+            
+           <table>
+               <tr>
+                   <th>Prix </th><th> &nbsp:&nbsp&nbsp </th>
+                   <th>{{stock.prix }}</th>
+               </tr>
+               <tr>
+                    <th>Quantité en stock</th><th> &nbsp:&nbsp&nbsp </th>
+                    <th>{{stock.prix }}</th>
+               </tr>
+               <tr>
+                    <th>Le Seuil limite de quantité minimum</th><th> &nbsp:&nbsp&nbsp </th>
+                    <th>{{stock.seuil }}</th>
+               </tr>
+           </table></br></br>
+           <a class='w3-button w3-white w3-border' href="{{ path("stock_liste") }}">Retour</a>
+{%  endblock %}
+
+{% block stylesheets %}   
+                                   
+     {{ parent() }}
+                                     
+{%  endblock %}

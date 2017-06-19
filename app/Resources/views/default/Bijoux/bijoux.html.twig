@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block beforebody %}
+    <a class='btn btn-primary' href="{{  path('nouveaubijou') }}">Nouveau bijou</a>
+    </br></br>
+{%  endblock %}
+
+{% block body %}
+    <table class="table"> 
+        <tr>
+                <th>
+                    Bijou
+                </th>
+                <th>
+                    Date de début prévue
+                </th>
+                <th>
+                    Date de fin prévue
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+    {% for bijou in bijoux %}
+        <tr>
+            <td>
+                <a class='btn btn-default' href="{{  path('bijou_liste_etape' , {'id':bijou.id}) }}">
+                    {{ bijou.nom }}
+                </a>
+            </td>
+            <td>
+                {{ bijou.datedebprev|date('d/m/Y') }}
+            </td>
+            <td>
+                {{ bijou.datefinprev|date('d/m/Y') }}
+            </td>
+            <td>
+                <a class='btn btn-default' href="{{  path('modifierbijou' , {'id':bijou.id}) }}">
+                    modifier
+                </a>
+                <a class='btn btn-default' href="{{  path('bijou_delete' , {'id':bijou.id}) }}">
+                    supprimer
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{%  endblock %}
+
+{% block stylesheets %}   
+    
+     {{ parent() }}
+
+{%  endblock %}
